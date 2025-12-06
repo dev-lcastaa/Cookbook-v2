@@ -137,7 +137,7 @@ public class CookbookDaoImpl implements CookbookDao {
                 log.info("cookbookId was NULL");
                 status = 1;
             }
-            // TODO create sql query to DELETE cookbook
+
             status = jdbcTemplate.update(
                     Constants.DELETE_COOKBOOK,
                     cookbookId
