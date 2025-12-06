@@ -10,6 +10,14 @@ export default function RecipeDetails({ recipe }) {
         );
     }
 
+    const ingredientsList = recipe.ingredients 
+        ? recipe.ingredients.split('\n').filter(item => item.trim() !== '')
+        : [];
+    
+    const instructionsList = recipe.instructions 
+        ? recipe.instructions.split('\n').filter(item => item.trim() !== '')
+        : [];
+
     return (
         <div style={{ color: "#e2e2e2" }}>
             <h2 style={{ fontSize: "1.5rem", marginTop: 0, color: "#ffffff" }}>
@@ -20,18 +28,34 @@ export default function RecipeDetails({ recipe }) {
                 <h3 style={{ fontSize: "1.1rem", color: "#ffffff", marginBottom: "0.5rem" }}>
                     Ingredients
                 </h3>
-                <p style={{ color: "#b0b0b0", whiteSpace: "pre-wrap" }}>
-                    {recipe.ingredients || "No ingredients listed"}
-                </p>
+                {ingredientsList.length > 0 ? (
+                    <ol style={{ color: "#b0b0b0", paddingLeft: "1.5rem" }}>
+                        {ingredientsList.map((ingredient, index) => (
+                            <li key={index} style={{ marginBottom: "0.5rem" }}>
+                                {ingredient.trim()}
+                            </li>
+                        ))}
+                    </ol>
+                ) : (
+                    <p style={{ color: "#b0b0b0" }}>No ingredients listed</p>
+                )}
             </section>
 
             <section>
                 <h3 style={{ fontSize: "1.1rem", color: "#ffffff", marginBottom: "0.5rem" }}>
                     Instructions
                 </h3>
-                <p style={{ color: "#b0b0b0", whiteSpace: "pre-wrap" }}>
-                    {recipe.instructions || "No instructions listed"}
-                </p>
+                {instructionsList.length > 0 ? (
+                    <ol style={{ color: "#b0b0b0", paddingLeft: "1.5rem" }}>
+                        {instructionsList.map((instruction, index) => (
+                            <li key={index} style={{ marginBottom: "0.5rem" }}>
+                                {instruction.trim()}
+                            </li>
+                        ))}
+                    </ol>
+                ) : (
+                    <p style={{ color: "#b0b0b0" }}>No instructions listed</p>
+                )}
             </section>
         </div>
     );

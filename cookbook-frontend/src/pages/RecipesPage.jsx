@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import RecipeCard from "../components/RecipeCard";
 import RecipeDetails from "../components/RecipeDetails";
-import Modal from "../components/Modal";
-import { fetchCookbooks } from "../api";
+import { fetchCookbooks, createRecipe } from "../api";
+import NewRecipeModal from "../components/NewRecipeModal";
 
 export default function RecipesPage() {
   const { id: cookbookId } = useParams();
@@ -16,25 +16,36 @@ export default function RecipesPage() {
 
   useEffect(() => {
     fetchCookbooks(1).then(data => {
-      console.log("All cookbooks:", data);
       const cookbook = data.find(c => c.cookbookId === parseInt(cookbookId));
-      console.log("Found cookbook:", cookbook);
       if (cookbook) {
         setCookbookName(cookbook.name);
         setRecipes(cookbook.recipes || []);
-        console.log("Set recipes:", cookbook.recipes);
       }
     });
   }, [cookbookId]);
 
   const handleSelectRecipe = (recipe) => {
-    console.log("Selected recipe:", recipe);
     setSelectedRecipe(recipe.recipeId);
     setRecipeDetails(recipe);
   };
 
-  const handleCreateRecipe = (name) => {
-    // Add your create recipe logic here
+  const handleCreateRecipe = (createRecipeDto) => {
+     console.log("Creating recipe with DTO:", createRecipeDto);
+    createRecipe(createRecipeDto)
+      .then(() => {
+        // After successful creation, refresh the cookbook list
+        return fetchCookbooks(1);
+      })
+      .then(data => {
+        const cookbook = data.find(c => c.cookbookId === parseInt(cookbookId));
+        if (cookbook) {
+          setRecipes(cookbook.recipes || []);
+        }
+        setShowModal(false);
+      })
+      .catch(error => {
+        console.error("Error creating recipe:", error);
+      });
   };
 
   return (
@@ -70,7 +81,12 @@ export default function RecipesPage() {
       </div>
 
       {showModal && (
-        <Modal title="New Recipe" onClose={() => setShowModal(false)} onSubmit={handleCreateRecipe} />
+        <NewRecipeModal 
+          title="New Recipe"
+          cookbookId={cookbookId} 
+          onClose={() => setShowModal(false)} 
+          onSubmit={handleCreateRecipe} 
+        />
       )}
     </div>
   );

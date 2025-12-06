@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CookbookCard from "../components/CookbookCard";
-import Modal from "../components/Modal";
-import { fetchCookbooks } from "../api";
-
+import NewCookbookModal from "../components/NewCookbookModal.jsx";
+import { fetchCookbooks, createCookbook } from "../api";
 
 export default function CookbooksPage() {
   const [cookbooks, setCookbooks] = useState([]);
@@ -11,15 +10,23 @@ export default function CookbooksPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchCookbooks(1).then(data => {
-      console.log("Cookbooks data:", data);
-      setCookbooks(data);
-    });
+    fetchCookbooks(1).then(setCookbooks);
   }, []);
 
-  const handleCreate = (name) => {
-    // Add your create cookbook logic here
-  };
+ const handleCreate = (createCookbookDto) => {
+  createCookbook(createCookbookDto)
+    .then(() => {
+      // After successful creation, refresh the cookbook list
+      return fetchCookbooks(1);
+    })
+    .then(updatedCookbooks => {
+      setCookbooks(updatedCookbooks);
+      setShowModal(false);
+    })
+    .catch(error => {
+      console.error("Error creating cookbook:", error);
+    });
+};
 
   return (
     <div className="cookbooks-page">
@@ -38,7 +45,13 @@ export default function CookbooksPage() {
         ))}
       </div>
 
-      {showModal && <Modal title="New Cookbook" onClose={() => setShowModal(false)} onSubmit={handleCreate} />}
+      {showModal && (
+        <NewCookbookModal 
+          title="New Cookbook" 
+          onClose={() => setShowModal(false)} 
+          onSubmit={handleCreate} 
+        />
+      )}
     </div>
   );
 }
