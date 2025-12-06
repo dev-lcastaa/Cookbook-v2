@@ -1,0 +1,164 @@
+.cookbooks-page {
+  padding: 2rem;
+}
+
+.cookbooks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.cookbooks-header h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 2.5rem;
+}
+
+.cookbooks-header button {
+  background: #333;
+  border: 1px solid #444;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #e2e2e2;
+  transition: 0.25s ease;
+}
+
+.cookbooks-header button:hover {
+  background: #444;
+  border-color: #555;
+}
+
+.cookbooks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.cookbook-card {
+  background-color: #1e1e1e;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 1px solid #333;
+}
+
+.cookbook-card:hover {
+  background-color: #2a2a2a;
+  border-color: #555;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+}
+
+.cookbook-card h2 {
+  margin: 0 0 0.5rem 0;
+  color: #ffffff;
+  font-size: 1.3rem;
+}
+
+.cookbook-card p {
+  margin: 0;
+  color: #b0b0b0;
+  font-size: 0.9rem;
+}
+
+.recipes-page {
+  padding: 2rem;
+}
+
+.recipes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.recipes-header > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.back-btn {
+  background: #333;
+  border: 1px solid #444;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #e2e2e2;
+  transition: 0.25s ease;
+  font-size: 1rem;
+}
+
+.back-btn:hover {
+  background: #444;
+  border-color: #555;
+}
+
+.recipes-header h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 2rem;
+}
+
+.recipes-header button {
+  background: #333;
+  border: 1px solid #444;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #e2e2e2;
+  transition: 0.25s ease;
+}
+
+.recipes-header button:hover {
+  background: #444;
+  border-color: #555;
+}
+
+.recipes-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.recipe-card {
+  background-color: #1e1e1e;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 1px solid #333;
+}
+
+.recipe-card:hover {
+  background-color: #2a2a2a;
+  border-color: #555;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.recipe-card h3 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.recipe-details-panel {
+  flex: 1;
+  padding: 1.5rem;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  border: 1px solid #333;
+}

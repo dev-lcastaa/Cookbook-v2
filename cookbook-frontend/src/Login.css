@@ -1,0 +1,54 @@
+/* Full page background */
+.login-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #121212;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Login box */
+.login-box {
+  background-color: #1e1e1e;
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  width: 320px;
+}
+
+/* Title */
+.login-box h1 {
+  color: #ffffff;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+.login-box button {
+  background-color: #333333;
+  color: #e2e2e2;
+  border: 1px solid #444;
+  padding: 0.6rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.login-box button:hover {
+  background-color: #444444;
+  border-color: #555;
+}
+
+/* Optional: Input fields if you add username/password later */
+.login-box input {
+  width: 100%;
+  padding: 0.5rem 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background-color: #2a2a2a;
+  color: #e2e2e2;
+}
