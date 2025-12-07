@@ -73,13 +73,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .recipes-header > div {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 5.5rem;
 }
 
 .back-btn {

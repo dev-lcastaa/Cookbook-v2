@@ -56,6 +56,15 @@ export default function RecipesPage() {
           <h1>📖 {cookbookName}</h1>
         </div>
         <button onClick={() => setShowModal(true)}>+ Add Recipe</button>
+        <button 
+            disabled={!selectedRecipe}
+            // onClick={() => setShowEditModal(true)}
+        > ✏️ Edit Recipe
+        </button>
+        <button 
+          disabled={!selectedRecipe}
+          // onClick={handleDeleteRecipe}
+        > 🗑️ Delete Recipe</button>
       </header>
 
       <div className="recipes-content">
