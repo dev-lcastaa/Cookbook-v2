@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: cookbook-database
+    restart: always
+    environment:
+      POSTGRES_DB: cookbook_database
+      POSTGRES_USER: cookbook_user
+      POSTGRES_PASSWORD: cookbook_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./cookbook-database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - cookbook-app-network
+
+  backend:
+    build: ./backend
+    container_name: cookbook-backend
+    ports:
+      - "8080:8080"
+    networks:
+      - cookbook-app-network
+    depends_on:
+      - postgres
+
+  frontend:
+    build: ./frontend
+    container_name: cookbook-frontend
+    ports:
+      - "3000:80"
+    networks:
+      - cookbook-app-network
+    environment:
+      - VITE_API_URL=http://backend:8080
+    depends_on:
+      - backend
+
+networks:
+  cookbook-app-network:
+    driver: bridge
