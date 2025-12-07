@@ -52,18 +52,6 @@ export default function RecipesPage() {
 
         <div className="header-buttons">
           <button onClick={() => setShowModal(true)}>+ Add Recipe</button>
-          <button 
-            disabled={!selectedRecipe} 
-            // onClick={() => setShowEditModal(true)}
-          >
-            ✏️ Edit Recipe
-          </button>
-          <button 
-            disabled={!selectedRecipe} 
-            // onClick={handleDeleteRecipe}
-          >
-            🗑️ Delete Recipe
-          </button>
         </div>
       </header>
 

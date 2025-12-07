@@ -11,7 +11,7 @@ export default function LoginPage() {
   return (
     <div className="login-screen">
       <div className="login-box">
-        <h1>🍽️ Cookbook Login</h1>
+        <h1>The Cookbook</h1>
         <button onClick={handleLogin}>Enter</button>
       </div>
     </div>

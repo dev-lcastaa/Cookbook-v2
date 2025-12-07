@@ -19,6 +19,13 @@ export default function RecipeDetails({ recipe }) {
 
   return (
     <div className="details-container">
+      <div className= "header-buttons">
+            <button> ✏️ Edit Recipe </button> 
+        </div> 
+        < div className="header-buttons">
+            <button> 🗑️ Delete Recipe</button>
+      </div>
+
       <div className="details-tile">
         <h2 className="details-title">{recipe.recipeName}</h2>
       </div>
