@@ -1,5 +1,6 @@
 package xyz.aqlabs.cookbookapi.controller;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import xyz.aqlabs.cookbookapi.service.CookbookService;
 
 import java.util.List;
 
-
+@Log4j2
 @RestController
 @RequestMapping("/api/v1/cookbook")
 public class CookbookController {
@@ -63,6 +64,9 @@ public class CookbookController {
             @RequestParam("userId") final int userId
     ) {
         List<CookbookDto> recipes = service.getListOfCookbooksByUserId(userId);
+        recipes.forEach(r -> {
+            log.info(r.toString());
+        });
         return ResponseEntity
                 .ok()
                 .body(recipes);

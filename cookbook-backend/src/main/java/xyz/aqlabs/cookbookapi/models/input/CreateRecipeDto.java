@@ -8,7 +8,7 @@ import lombok.Data;
 public class CreateRecipeDto {
 
     private int cookbookId;
-    private String name;
+    private String recipeName;
     private String ingredients;
     private String instructions;
 

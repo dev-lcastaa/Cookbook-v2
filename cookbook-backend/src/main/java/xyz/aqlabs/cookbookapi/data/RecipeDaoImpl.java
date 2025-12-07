@@ -34,7 +34,7 @@ public class RecipeDaoImpl implements RecipeDao {
             status = jdbcTemplate.update(
                     Constants.CREATE_RECIPE,
                     recipe.getCookbookId(),
-                    recipe.getName(),
+                    recipe.getRecipeName(),
                     recipe.getIngredients(),
                     recipe.getInstructions()
             );
