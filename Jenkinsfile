@@ -10,12 +10,13 @@ pipeline {
 
     stages {
         stage('Build Backend') {
-            steps {
-                dir("${BACKEND_DIR}") {
-                    echo "Building Spring Boot backend..."
-                    sh 'chmod +x ./mvnw'
-                    sh './mvnw clean package -DskipTests'
-                }
+            dir('cookbook-backend') {
+                sh '''
+                    export JAVA_HOME=/home/lcastaa/.sdkman/candidates/java/current
+                    export PATH=$JAVA_HOME/bin:$PATH
+                    chmod +x ./mvnw
+                    ./mvnw clean package -DskipTests
+                '''
             }
         }
 
