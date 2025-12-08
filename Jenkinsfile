@@ -9,7 +9,7 @@ pipeline {
         stage('Hello World') {
             steps {
                 script {
-                   echo 'Hi this is from the pipeline'
+                   echo 'Hi this is from the pipeline with a change'
                 }
             }
         }
