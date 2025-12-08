@@ -10,7 +10,7 @@ pipeline {
 
     stages {
         stage('Build Backend') {
-            dir('cookbook-backend') {
+            dir("${BACKEND_DIR}") {
                 sh '''
                     export JAVA_HOME=/home/lcastaa/.sdkman/candidates/java/current
                     export PATH=$JAVA_HOME/bin:$PATH
