@@ -39,7 +39,7 @@ class CookbookServiceTests {
     void setUp() {
         cookbook = new Cookbook(1, 1, "Italian Cookbook", "Italian", "2025-12-06", "2025-12-06");
         recipe = new Recipe(1, 1, "Pasta", "Noodles, Sauce", "Boil noodles");
-        createCookbookDto = new CreateCookbookDto(1, "New Cookbook", "Mexican", null, null);
+        createCookbookDto = new CreateCookbookDto(1, "New Cookbook", "Mexican");
     }
 
 

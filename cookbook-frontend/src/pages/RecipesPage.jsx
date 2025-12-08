@@ -30,43 +30,32 @@ export default function RecipesPage() {
   };
 
   const handleCreateRecipe = (createRecipeDto) => {
-     console.log("Creating recipe with DTO:", createRecipeDto);
+    console.log("Creating recipe with DTO:", createRecipeDto);
     createRecipe(createRecipeDto)
-      .then(() => {
-        // After successful creation, refresh the cookbook list
-        return fetchCookbooks(1);
-      })
+      .then(() => fetchCookbooks(1))
       .then(data => {
         const cookbook = data.find(c => c.cookbookId === parseInt(cookbookId));
-        if (cookbook) {
-          setRecipes(cookbook.recipes || []);
-        }
+        if (cookbook) setRecipes(cookbook.recipes || []);
         setShowModal(false);
       })
-      .catch(error => {
-        console.error("Error creating recipe:", error);
-      });
+      .catch(console.error);
   };
 
   return (
     <div className="recipes-page">
+      
+      {/* ================= HEADER ================= */}
       <header className="recipes-header">
-        <div>
-          <button onClick={() => navigate("/cookbooks")} className="back-btn">← Back</button>
+        <div className="header-main">
           <h1>📖 {cookbookName}</h1>
         </div>
-        <button onClick={() => setShowModal(true)}>+ Add Recipe</button>
-        <button 
-            disabled={!selectedRecipe}
-            // onClick={() => setShowEditModal(true)}
-        > ✏️ Edit Recipe
-        </button>
-        <button 
-          disabled={!selectedRecipe}
-          // onClick={handleDeleteRecipe}
-        > 🗑️ Delete Recipe</button>
+
+        <div className="header-buttons">
+          <button onClick={() => setShowModal(true)}>+ Add Recipe</button>
+        </div>
       </header>
 
+      {/* ================= RECIPES GRID ================= */}
       <div className="recipes-content">
         <div className="recipes-grid">
           {recipes && recipes.length > 0 ? (
@@ -74,7 +63,7 @@ export default function RecipesPage() {
               <RecipeCard 
                 key={recipe.recipeId} 
                 recipe={recipe} 
-                onClick={() => handleSelectRecipe(recipe)} 
+                onClick={() => navigate(`/recipe/${recipe.recipeId}`, { state: { recipe } })}
               />
             ))
           ) : (

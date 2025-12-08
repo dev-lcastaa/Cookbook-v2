@@ -1,18 +1,27 @@
-.cookbooks-page {
-  padding: 2rem;
-}
-
+/* ===========================
+   COOKBOOKS HEADER
+=========================== */
 .cookbooks-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* center the title */
+  margin-bottom: 2.5rem;
+  gap: 1rem; /* adds space between elements */
 }
 
 .cookbooks-header h1 {
   margin: 0;
   color: #ffffff;
   font-size: 2.5rem;
+  text-align: center;
+}
+
+.cookbooks-header .header-buttons {
+  display: flex;
+  gap: 1rem; /* space between buttons */
+  flex-wrap: wrap; /* wrap on small screens */
+  justify-content: center; /* center buttons under the title */
 }
 
 .cookbooks-header button {
@@ -23,6 +32,7 @@
   cursor: pointer;
   color: #e2e2e2;
   transition: 0.25s ease;
+  font-size: 1rem;
 }
 
 .cookbooks-header button:hover {
@@ -30,20 +40,76 @@
   border-color: #555;
 }
 
+/* ===========================
+   RECIPES HEADER
+=========================== */
+.recipes-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* center the title */
+  margin-bottom: 2rem;
+  gap: 1rem; /* space between title and buttons */
+}
+
+.recipes-header > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem; /* space between back button and title */
+}
+
+.recipes-header h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.recipes-header .header-buttons {
+  display: flex;
+  gap: 1rem; /* space between buttons */
+  flex-wrap: wrap; /* wrap buttons on small screens */
+  justify-content: center;
+  padding: 7px; /* center buttons under the title */
+}
+
+.recipes-header button {
+  background: #333;
+  border: 1px solid #444;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #e2e2e2;
+  transition: 0.25s ease;
+  font-size: 1rem;
+}
+
+.recipes-header button:hover {
+  background: #444;
+  border-color: #555;
+}
+
+/* ===========================
+   COOKBOOKS GRID / TILE STYLING
+=========================== */
 .cookbooks-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.75rem;
 }
 
 .cookbook-card {
   background-color: #1e1e1e;
   padding: 1.5rem;
   border-radius: 12px;
+  border: 1px solid #333;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   cursor: pointer;
   transition: all 0.25s ease;
-  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .cookbook-card:hover {
@@ -62,103 +128,210 @@
 .cookbook-card p {
   margin: 0;
   color: #b0b0b0;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
 }
 
-.recipes-page {
-  padding: 2rem;
-}
-
-.recipes-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 3rem;
-}
-
-.recipes-header > div {
-  display: flex;
-  align-items: center;
-  gap: 5.5rem;
-}
-
-.back-btn {
-  background: #333;
-  border: 1px solid #444;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  color: #e2e2e2;
-  transition: 0.25s ease;
-  font-size: 1rem;
-}
-
-.back-btn:hover {
-  background: #444;
-  border-color: #555;
-}
-
-.recipes-header h1 {
-  margin: 0;
-  color: #ffffff;
-  font-size: 2rem;
-}
-
-.recipes-header button {
-  background: #333;
-  border: 1px solid #444;
-  padding: 10px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  color: #e2e2e2;
-  transition: 0.25s ease;
-}
-
-.recipes-header button:hover {
-  background: #444;
-  border-color: #555;
-}
-
-.recipes-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: start;
-}
-
+/* ===========================
+   RECIPES GRID / TILE STYLING
+=========================== */
 .recipes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .recipe-card {
   background-color: #1e1e1e;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  padding: 1.3rem;
+  border-radius: 12px;
+  border: 1px solid #333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   cursor: pointer;
   transition: all 0.25s ease;
-  border: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .recipe-card:hover {
   background-color: #2a2a2a;
   border-color: #555;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
 }
 
 .recipe-card h3 {
   margin: 0;
   color: #ffffff;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
-.recipe-details-panel {
-  flex: 1;
-  padding: 1.5rem;
+.recipe-card p {
+  margin: 0.5rem 0 0 0;
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* ===========================
+   RECIPE DETAILS PAGE (TILED)
+=========================== */
+.details-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.details-tile {
   background-color: #1e1e1e;
+  padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid #333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.details-title {
+  font-size: 2rem;
+  color: #ffffff;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+}
+
+.section-title {
+  color: #ffffff;
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.details-list {
+  padding-left: 1.4rem;
+  color: #cfcfcf;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.details-list.numbered {
+  padding-left: 1.6rem;
+}
+
+.details-list-item {
+  margin-bottom: 0.5rem;
+}
+
+.details-empty {
+  color: #999;
+}
+
+.details-back-btn {
+  background: #333;
+  border: 1px solid #444;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #e2e2e2;
+  transition: 0.25s ease;
+  margin-bottom: 1.5rem;
+}
+
+.details-back-btn:hover {
+  background: #444;
+  border-color: #555;
+}
+
+/* ===========================
+   MOBILE OPTIMIZATION
+=========================== */
+@media (max-width: 600px) {
+  /* Headers */
+  .cookbooks-header,
+  .recipes-header {
+    flex-direction: column;
+    align-items: center; /* center titles on mobile */
+    gap: 1rem;
+  }
+
+  .cookbooks-header h1,
+  .recipes-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .cookbooks-header .header-buttons,
+  .recipes-header .header-buttons {
+    width: 100%;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .cookbooks-header button,
+  .recipes-header button {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+  }
+
+  .recipes-header > div {
+    gap: 1rem;
+  }
+
+  /* Cookbooks */
+  .cookbooks-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .cookbook-card {
+    padding: 1.3rem;
+  }
+
+  .cookbook-card h2 {
+    font-size: 1.2rem;
+  }
+
+  .cookbook-card p {
+    font-size: 0.9rem;
+  }
+
+  /* Recipes */
+  .recipes-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .recipe-card {
+    padding: 1.2rem;
+  }
+
+  .recipe-card h3 {
+    font-size: 1rem;
+  }
+
+  .recipe-card p {
+    font-size: 0.9rem;
+  }
+
+  /* Recipe Details */
+  .details-container {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .details-tile {
+    padding: 1.2rem;
+  }
+
+  .details-title {
+    font-size: 1.7rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+  }
+
+  .details-list {
+    font-size: 0.95rem;
+  }
 }

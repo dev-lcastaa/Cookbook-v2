@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CookbookCard from "../components/CookbookCard";
-import NewCookbookModal from "../components/NewCookbookModal.jsx";
+import NewCookbookModal from "../components/NewCookbookModal";
 import { fetchCookbooks, createCookbook } from "../api";
 
 export default function CookbooksPage() {
@@ -27,6 +27,7 @@ export default function CookbooksPage() {
       console.error("Error creating cookbook:", error);
     });
 };
+
 
   return (
     <div className="cookbooks-page">
