@@ -13,6 +13,7 @@ pipeline {
             steps {
                 dir("${BACKEND_DIR}") {
                     echo "Building Spring Boot backend..."
+                    sh 'chmod +x ./mvnw'
                     sh './mvnw clean package -DskipTests'
                 }
             }
