@@ -2,24 +2,20 @@ pipeline {
     agent any
 
     environment {
-        FRONTEND_DIR = 'cookbook-frontend'
-        BACKEND_DIR = 'cookbook-backend'
-        JAVA_HOME = '/home/lcastaa/.sdkman/candidates/java/current'
-        PATH = "${JAVA_HOME}/bin:${env.PATH}"
-    }
+            SCRIPT_DIR = 'aql-pipeline-scripts'
+            FRONTEND_DIR = 'cookbook-frontend'
+            BACKEND_DIR = 'cookbook-backend'
+        }
 
-    stages {
-        stage('Build Backend') {
-            steps {
-                dir("${BACKEND_DIR}") {
-                    echo "Building Spring Boot backend..."
-                    sh '''
-                        chmod +x ./mvnw
-                        ./mvnw clean package -DskipTests
-                    '''
+        stages {
+            stage('Clone Pipeline Scripts') {
+                steps {
+                    // Clone the scripts repo
+                    dir("${SCRIPT_DIR}") {
+                        git branch: 'main', url: 'https://github.com/AspireQLabs/aql-pipeline-scripts.git'
+                    }
                 }
             }
-        }
 
         stage('Build Frontend') {
             steps {
@@ -29,6 +25,16 @@ pipeline {
                     echo "Building frontend..."
                     sh 'npm run build'
                 }
+            }
+        }
+
+        stage('Clean up old containers') {
+            steps{
+                echo "Running clean up script"
+                sh """
+                   chmod +x ${SCRIPT_DIR}/container-cleanup.sh
+                   ${SCRIPT_DIR}/container-cleanup.sh ${BACKEND_DIR} ${FRONTEND_DIR} cookbook-database
+                """
             }
         }
 
