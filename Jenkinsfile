@@ -6,17 +6,20 @@ pipeline {
         BACKEND_DIR = 'cookbook-backend'
         DOCKER_FRONTEND_IMAGE = 'cookbook-frontend:latest'
         DOCKER_BACKEND_IMAGE = 'cookbook-backend:latest'
+        JAVA_HOME = '/home/lcastaa/.sdkman/candidates/java/current'
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
     }
 
     stages {
         stage('Build Backend') {
-            dir("${BACKEND_DIR}") {
-                sh '''
-                    export JAVA_HOME=/home/lcastaa/.sdkman/candidates/java/current
-                    export PATH=$JAVA_HOME/bin:$PATH
-                    chmod +x ./mvnw
-                    ./mvnw clean package -DskipTests
-                '''
+            steps {
+                dir("${BACKEND_DIR}") {
+                    echo "Building Spring Boot backend..."
+                    sh '''
+                        chmod +x ./mvnw
+                        ./mvnw clean package -DskipTests
+                    '''
+                }
             }
         }
 
