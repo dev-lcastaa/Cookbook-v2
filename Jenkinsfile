@@ -13,7 +13,7 @@ pipeline {
             steps {
                 dir("${BACKEND_DIR}") {
                     echo "Building Spring Boot backend..."
-                    sh 'mvn clean package -DskipTests'
+                    sh './mvnw clean package -DskipTests'
                 }
             }
         }
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 dir("${BACKEND_DIR}") {
                     echo "Running backend tests..."
-                    sh 'mvn test'
+                    sh './mvnw test'
                 }
             }
         }
