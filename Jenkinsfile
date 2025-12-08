@@ -4,8 +4,6 @@ pipeline {
     environment {
         FRONTEND_DIR = 'cookbook-frontend'
         BACKEND_DIR = 'cookbook-backend'
-        DOCKER_FRONTEND_IMAGE = 'cookbook-frontend:latest'
-        DOCKER_BACKEND_IMAGE = 'cookbook-backend:latest'
         JAVA_HOME = '/home/lcastaa/.sdkman/candidates/java/current'
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
     }
@@ -23,7 +21,6 @@ pipeline {
             }
         }
 
-
         stage('Build Frontend') {
             steps {
                 dir("${FRONTEND_DIR}") {
@@ -35,20 +32,15 @@ pipeline {
             }
         }
 
-        stage('Docker Build & Deploy') {
+        stage('Docker Compose Up') {
             steps {
-                echo "Building Docker images..."
-                sh """
-                    docker build -t ${DOCKER_BACKEND_IMAGE} ${BACKEND_DIR}
-                    docker build -t ${DOCKER_FRONTEND_IMAGE} ${FRONTEND_DIR}
-                """
-                echo "Running containers..."
-                sh """
-                    docker rm -f cookbook-backend || true
-                    docker rm -f cookbook-frontend || true
-                    docker run -d --name cookbook-backend -p 8080:8080 ${DOCKER_BACKEND_IMAGE}
-                    docker run -d --name cookbook-frontend -p 3000:3000 ${DOCKER_FRONTEND_IMAGE}
-                """
+                echo "Building and deploying services with Docker Compose..."
+                sh '''
+                    # Navigate to project root if docker-compose.yml is there
+                    docker-compose down --remove-orphans
+                    docker-compose build
+                    docker-compose up -d
+                '''
             }
         }
     }
