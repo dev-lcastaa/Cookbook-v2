@@ -37,9 +37,9 @@ pipeline {
                 echo "Building and deploying services with Docker Compose..."
                 sh '''
                     # Navigate to project root if docker-compose.yml is there
-                    docker-compose down --remove-orphans
-                    docker-compose build
-                    docker-compose up -d
+                    docker compose down --remove-orphans
+                    docker compose build
+                    docker compose up -d
                 '''
             }
         }
