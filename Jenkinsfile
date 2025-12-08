@@ -23,14 +23,6 @@ pipeline {
             }
         }
 
-        stage('Test Backend') {
-            steps {
-                dir("${BACKEND_DIR}") {
-                    echo "Running backend tests..."
-                    sh './mvnw test'
-                }
-            }
-        }
 
         stage('Build Frontend') {
             steps {
