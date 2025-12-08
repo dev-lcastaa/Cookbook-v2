@@ -39,7 +39,7 @@ public class CookbookDaoImplTests {
 
     @Test
     void testCreateCookbook() {
-        CreateCookbookDto dto = new CreateCookbookDto(2, "New Cookbook", "Mexican", null, null);
+        CreateCookbookDto dto = new CreateCookbookDto(2, "New Cookbook", "Mexican");
 
         int rows = cookbookDao.createCookbook(dto);
 

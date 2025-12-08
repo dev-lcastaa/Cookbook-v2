@@ -1,4 +1,3 @@
-version: "3.9"
 
 services:
 
@@ -19,7 +18,7 @@ services:
       - cookbook-app-network
 
   backend:
-    build: ./backend
+    build: ./cookbook-backend
     container_name: cookbook-backend
     ports:
       - "8080:8080"
@@ -29,17 +28,22 @@ services:
       - postgres
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./cookbook-frontend
+      args:
+        VITE_API_URL: http://localhost:8080
     container_name: cookbook-frontend
     ports:
       - "3000:80"
     networks:
       - cookbook-app-network
-    environment:
-      - VITE_API_URL=http://backend:8080
     depends_on:
       - backend
+
 
 networks:
   cookbook-app-network:
     driver: bridge
+
+volumes:
+  postgres_data:

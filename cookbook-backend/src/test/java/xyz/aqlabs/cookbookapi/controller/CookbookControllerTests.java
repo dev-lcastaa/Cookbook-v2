@@ -43,7 +43,7 @@ class CookbookControllerTests {
         objectMapper = new ObjectMapper();
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
-        createDto = new CreateCookbookDto(1, "Italian Cookbook", "Italian", null, null);
+        createDto = new CreateCookbookDto(1, "Italian Cookbook", "Italian");
         cookbook = new Cookbook(1, 1, "Italian Cookbook", "Italian", "2025-12-06", "2025-12-06");
         cookbookDto = new CookbookDto();
         cookbookDto.setCookbookId(1);

@@ -1,14 +1,14 @@
 // src/api.js
-export const API_BASE = "http://localhost:8080/api/v1"; // Adjust your Spring Boot base URL
+const API_BASE = import.meta.env.VITE_API_URL
 
 // Cookbooks
 export async function fetchCookbooks(userId) {
-  return fetch(`${API_BASE}/cookbook/list?userId=${userId}`).then(response => response.json());
+  return fetch(`${API_BASE}/api/v1/cookbook/list?userId=${userId}`).then(response => response.json());
 }
 
 export async function createCookbook(data) {
   console.log("Creating cookbook with data:", data);
-  return fetch(`${API_BASE}/cookbook`, {
+  return fetch(`${API_BASE}/api/v1/cookbook`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
@@ -18,7 +18,7 @@ export async function createCookbook(data) {
 // Recipes
 export async function createRecipe(data) {
   console.log("Creating recipe with data:", data);
-  return fetch(`${API_BASE}/recipe`, {
+  return fetch(`${API_BASE}/api/v1/recipe`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data),
