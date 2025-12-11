@@ -31,7 +31,7 @@ services:
     build:
       context: ./cookbook-frontend
       args:
-        VITE_API_URL: http://backend:8080
+        VITE_API_URL: http://192.168.1.198:8080
     container_name: cookbook-frontend
     ports:
       - "3000:80"
