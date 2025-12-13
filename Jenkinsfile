@@ -8,16 +8,22 @@ pipeline {
         }
 
         stages {
-            stage('Clone Pipeline Scripts') {
+            stage('Initializing Pipeline') {
+                script {
+                    notifyDiscord("Initializing Pipeline")
+                }
                 steps {
-                    // Clone the scripts repo
+                    echo "Cloning pipeline scripts..."
                     dir("${SCRIPT_DIR}") {
                         git branch: 'main', url: 'https://github.com/AspireQLabs/aql-pipeline-scripts.git'
                     }
                 }
             }
 
-        stage('Build Frontend') {
+        stage('Building Frontend') {
+            script {
+                  notifyDiscord("- Building Frontend")
+            }
             steps {
                 dir("${FRONTEND_DIR}") {
                     echo "Installing frontend dependencies..."
@@ -28,9 +34,12 @@ pipeline {
             }
         }
 
-        stage('Clean up old containers') {
+        stage('Preparing Environment') {
+            script {
+                  notifyDiscord("- Preparing Environment")
+            }
             steps{
-                echo "Running clean up script"
+                echo "Cleaning old containers..."
                 sh """
                    chmod +x ${SCRIPT_DIR}/container-cleanup.sh
                    ${SCRIPT_DIR}/container-cleanup.sh ${BACKEND_DIR} ${FRONTEND_DIR} cookbook-database
@@ -38,11 +47,13 @@ pipeline {
             }
         }
 
-        stage('Docker Compose Up') {
+        stage('Deploying to Environment') {
+            script {
+                  notifyDiscord("- Deploying to Environment")
+            }
             steps {
                 echo "Building and deploying services with Docker Compose..."
                 sh '''
-                    # Navigate to project root if docker-compose.yml is there
                     docker compose down --remove-orphans
                     docker compose build
                     docker compose up -d
@@ -53,10 +64,27 @@ pipeline {
 
     post {
         success {
-            echo "Build, test, and deploy completed successfully!"
+            echo "Pipeline finished with success...!"
+            script {
+                  notifyDiscord("Pipeline finished with success...!")
+            }
         }
         failure {
             echo "Pipeline failed. Check logs for errors."
+            script {
+                  notifyDiscord("Pipeline failed. Check logs for errors.")
+            }
         }
     }
+
+
+    def notifyDiscord(String message) {
+      withCredentials([string(credentialsId: 'discord-webhook', variable: 'DISCORD_WEBHOOK')]) {
+        sh """
+          curl -H "Content-Type: application/json" \\
+               -X POST \\
+               -d "{\\"content\\": \\"${message}\\"}" \\
+               $DISCORD_WEBHOOK
+        """
+      }
 }
