@@ -87,4 +87,5 @@ pipeline {
                $DISCORD_WEBHOOK
         """
       }
+    }
 }
