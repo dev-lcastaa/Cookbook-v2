@@ -53,6 +53,7 @@ pipeline {
                    notifyDiscord("- Running Backend Tests & Coverage Tollgate")
                }
                dir("${BACKEND_DIR}") {
+                   sh 'chmod +x mvnw'
                    sh './mvnw clean verify'
                }
            }
