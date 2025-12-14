@@ -1,6 +1,7 @@
 import React from "react";
 
-export default function RecipeDetails({ recipe }) {
+export default function RecipeDetails({ recipe, onEdit, onDelete }) {
+
   if (!recipe) {
     return (
       <div className="details-empty-message">
@@ -20,10 +21,10 @@ export default function RecipeDetails({ recipe }) {
   return (
     <div className="details-container">
       <div className= "header-buttons">
-            <button> ✏️ Edit Recipe </button> 
-        </div> 
-        < div className="header-buttons">
-            <button> 🗑️ Delete Recipe</button>
+          <button  onClick={() => onEdit(recipe)}> ✏️ Edit Recipe </button> 
+      </div> 
+      < div className="header-buttons">
+          <button onClick={() => onDelete(recipe)}> 🗑️ Delete Recipe</button>
       </div>
 
       <div className="details-tile">

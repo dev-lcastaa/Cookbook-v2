@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import RecipeCard from "../components/RecipeCard";
 import RecipeDetails from "../components/RecipeDetails";
-import { fetchCookbooks, createRecipe } from "../api";
+import { fetchCookbooks, createRecipe, deleteRecipe, updateRecipe, fetchRecipe } from "../api";
 import NewRecipeModal from "../components/NewRecipeModal";
 
 export default function RecipesPage() {
@@ -11,6 +11,11 @@ export default function RecipesPage() {
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [recipeToEdit, setRecipeToEdit] = useState(null);
+  const [recipeToDelete, setRecipeToDelete] = useState(null);
+
   const [cookbookName, setCookbookName] = useState("");
   const navigate = useNavigate();
 
@@ -41,6 +46,27 @@ export default function RecipesPage() {
       .catch(console.error);
   };
 
+  // When clicking edit
+  const handleEditClick = (recipe) => {
+    setRecipeToEdit(recipe);
+    setShowEditModal(true);
+  };
+
+  const handleDeleteClick = (recipe) => {
+    setRecipeToDelete(recipe);
+    setShowDeleteModal(true);
+  };
+
+  const handleUpdateRecipe = (updatedRecipe) => {
+    updateRecipe(updatedRecipe).then(() => fetchRecipes(updatedRecipe.recipeId));
+    setShowEditModal(false);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteRecipe(recipeToDelete.recipeId).then(() => fetchRecipes());
+    setShowDeleteModal(false);
+  };
+
   return (
     <div className="recipes-page">
       
@@ -51,7 +77,8 @@ export default function RecipesPage() {
         </div>
 
         <div className="header-buttons">
-          <button onClick={() => setShowModal(true)}>+ Add Recipe</button>
+          <button onClick={() => navigate("/cookbooks")}> - Back to Cookbooks</button>
+          <button onClick={() => setShowModal(true)}> + Add Recipe</button>
         </div>
       </header>
 
@@ -63,19 +90,13 @@ export default function RecipesPage() {
               <RecipeCard 
                 key={recipe.recipeId} 
                 recipe={recipe} 
-                onClick={() => navigate(`/recipe/${recipe.recipeId}`, { state: { recipe } })}
+                onClick={() => navigate(`/cookbook/${cookbookId}/recipe/${recipe.recipeId}`)}
               />
             ))
           ) : (
             <p style={{ color: "#e2e2e2" }}>No recipes found</p>
           )}
         </div>
-
-        {selectedRecipe && (
-          <div className="recipe-details-panel">
-            <RecipeDetails recipe={recipeDetails} />
-          </div>
-        )}
       </div>
 
       {showModal && (
