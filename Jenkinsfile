@@ -52,7 +52,9 @@ pipeline {
                script {
                    notifyDiscord("- Running Backend Tests & Coverage Tollgate")
                }
-               sh './mvnw clean verify'
+               dir("${BACKEND_DIR}") {
+                   sh './mvnw clean verify'
+               }
            }
         }
 
