@@ -46,6 +46,16 @@ pipeline {
             }
         }
 
+
+        stage('Backend Tests & Coverage Tollgate') {
+           steps {
+               script {
+                   notifyDiscord("- Running Backend Tests & Coverage Tollgate")
+               }
+               sh 'mvn clean verify'
+           }
+        }
+
         stage('Preparing Environment') {
             steps {
                 script {
