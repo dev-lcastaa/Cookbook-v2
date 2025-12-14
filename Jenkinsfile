@@ -13,8 +13,6 @@ pipeline {
     agent any
 
     environment {
-        JAVA_HOME = "${env.HOME}/.sdkman/candidates/java/current"
-        PATH = "${env.JAVA_HOME}/bin:${env.PATH}"
         SCRIPT_DIR   = 'aql-pipeline-scripts'
         FRONTEND_DIR = 'cookbook-frontend'
         BACKEND_DIR  = 'cookbook-backend'
@@ -55,7 +53,6 @@ pipeline {
                    notifyDiscord("- Running Backend Tests & Coverage Tollgate")
                }
                dir("${BACKEND_DIR}") {
-                   sh 'java -version'
                    sh 'chmod +x mvnw'
                    sh './mvnw clean verify'
                }
