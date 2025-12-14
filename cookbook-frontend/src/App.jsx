@@ -12,7 +12,7 @@ export default function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/cookbooks" element={<CookbooksPage />} />
         <Route path="/cookbook/:id" element={<RecipesPage />} />
-        <Route path="/recipe/:id" element={<ShowRecipeDetailsPage />} />
+        <Route path="/cookbook/:cookbookId/recipe/:recipeId" element={<ShowRecipeDetailsPage />} />
       </Routes>
     </BrowserRouter>
   );

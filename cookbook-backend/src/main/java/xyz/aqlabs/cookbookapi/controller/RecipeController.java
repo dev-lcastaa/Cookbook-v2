@@ -15,6 +15,13 @@ public class RecipeController {
     @Autowired
     private RecipeService service;
 
+    @GetMapping
+    public ResponseEntity<Recipe> getRecipeByRecipeId(@RequestParam final int recipeId){
+        Recipe recipe = service.getRecipeByRecipeId(recipeId);
+        return ResponseEntity
+                .ok()
+                .body(recipe);
+    }
 
     @PostMapping
     public ResponseEntity<Integer> createRecipe(@RequestBody CreateRecipeDto dto) {
