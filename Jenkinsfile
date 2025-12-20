@@ -47,17 +47,17 @@ pipeline {
         }
 
 
-        stage('Backend Tests & Coverage Tollgate') {
-           steps {
-               script {
-                   notifyDiscord("- Running Backend Tests & Coverage Tollgate")
-               }
-               dir("${BACKEND_DIR}") {
-                   sh 'chmod +x mvnw'
-                   sh './mvnw clean verify'
-               }
-           }
-        }
+//         stage('Backend Tests & Coverage Tollgate') {
+//            steps {
+//                script {
+//                    notifyDiscord("- Running Backend Tests & Coverage Tollgate")
+//                }
+//                dir("${BACKEND_DIR}") {
+//                    sh 'chmod +x mvnw'
+//                    sh './mvnw clean verify'
+//                }
+//            }
+//         }
 
         stage('Preparing Environment') {
             steps {

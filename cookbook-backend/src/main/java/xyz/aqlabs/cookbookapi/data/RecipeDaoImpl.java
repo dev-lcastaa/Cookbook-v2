@@ -122,7 +122,6 @@ public class RecipeDaoImpl implements RecipeDao {
         }
 
         return recipes;
-
     }
 
     @Override
@@ -131,11 +130,6 @@ public class RecipeDaoImpl implements RecipeDao {
         Recipe recipe = null;
 
         try {
-            if (recipeId == null || recipeId <= 0) {
-                log.info("An invalid recipeId was received {}", recipeId);
-                return recipe;
-            }
-
             SqlRowSet rs = jdbcTemplate.queryForRowSet(
                     Constants.GET_RECIPE_BY_RECIPE_ID,
                     recipeId
